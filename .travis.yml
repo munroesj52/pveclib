@@ -1,0 +1,74 @@
+# Travis configuration file for pveclib
+#
+# Report bugs to <munroesj52@gmail.com pc@us.ibm.com>.
+#
+# Copyright (C) 2020 Free Software Foundation, Inc.
+#
+# This configure script is free software; the Free Software Foundation
+# gives unlimited permission to copy, distribute and modify it.
+
+# DO NOT create top level (global) keys like env, arch, os, compiler.
+# The top level/global keys invoke [unwanted] matrix expansion. Also
+# see https://stackoverflow.com/q/58473000/608639 and
+# https://docs.travis-ci.com/user/reference/overview/ and
+# https://docs.travis-ci.com/user/multi-cpu-architectures and
+# https://github.com/travis-ci/travis-yml/blob/master/schema.json.
+
+language: c
+dist: bionic
+
+git:
+  depth: 5
+
+jobs:
+  include:
+    - name: Standard build, GCC, ppc64le
+      os: linux
+      arch: ppc64le
+      compiler: gcc
+      dist: bionic
+      env:
+        - CC="gcc-8"
+        - CFLAGS="-g2 -O3 -mcpu=power8"
+    - name: Standard build, Clang, ppc64le
+      os: linux
+      arch: ppc64le
+      compiler: clang
+      env:
+        - CC="clang-9"
+        - CFLAGS="-g2 -O3 -mcpu=power8"
+
+  allow_failures:
+    # GCC 7 and 8 support ISO/IEC TS 18661 or N2341
+    # Clang 7 compiler is completely broken on PPC64 and s390x
+    # Clang 8 and 9 does not support _Decimal128 or __int128 types
+    - compiler: clang
+
+before_install:
+  - |
+    if [[ "$TRAVIS_CPU_ARCH" == "ppc64le" ]] || [[ "$TRAVIS_CPU_ARCH" == "s390x" ]]; then
+        if [[ "$TRAVIS_COMPILER" == "gcc" ]]; then
+            sudo apt-get -qq -y install --no-install-recommends gcc-8
+        fi
+        if [[ "$TRAVIS_COMPILER" == "clang" ]]; then
+            sudo apt-get -qq -y install --no-install-recommends clang-9
+        fi
+    fi
+
+script:
+  - ./configure
+  - make -j 3
+  - make check
+
+# Whitelist branches to avoid testing feature branches twice
+#branches:
+#  only:
+#    - master
+#    - /\/ci$/
+
+notifications:
+  email:
+    recipients:
+      - pveclib-build@example.com
+    on_success: always # default: change
+    on_failure: always # default: always
