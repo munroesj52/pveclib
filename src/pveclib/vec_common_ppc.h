@@ -199,7 +199,7 @@
  */
 
 /*
- * GCC on Linux uses __BYTE_ORDER__, __ORDER_LITTLE_ENDIAN__ and __BIG_ENDIAN__ macros.
+ * GCC on Linux uses __BYTE_ORDER__, __ORDER_LITTLE_ENDIAN__ and __ORDER_BIG_ENDIAN__ macros.
  * XLC on AIX uses __LITTLE_ENDIAN__ and __BIG_ENDIAN__ macros.
  */
 #if (defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)) || defined(__LITTLE_ENDIAN__)
