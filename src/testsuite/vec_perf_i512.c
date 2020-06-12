@@ -151,7 +151,7 @@ timed_mul2048x2048_MN (void)
 
   int rc = 0;
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   kp1 = &k1.x8.v0x512;
   kp2 = &k2.x8.v0x512;
   ip = &m1.x4.v0x512;
@@ -211,7 +211,7 @@ timed_mul2048x2048_MN (void)
   return (rc);
 }
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
 #define __NDX16(__index) (__index)
 #else
 #define __NDX16(__index) ((16 - 1) - (__index))
@@ -227,7 +227,7 @@ timed_mul4096x4096_MN (void)
 
   int rc = 0;
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   kp1 = &k1[0];
   kp2 = &k2[0];
   ip = &m1.x8.v0x512;

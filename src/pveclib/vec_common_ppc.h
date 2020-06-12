@@ -157,7 +157,7 @@
  * To get correct results for both endians, one could code something
  * like this:
  * \code
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   const vui32_t signmask = { 0, 0, 0, 0x80000000 };
   const vui32_t expmask = { 0, 0, 0, 0x7fff0000 };
 #else
@@ -293,7 +293,7 @@ typedef union
   /*! \brief Struct of two unsigned long int (64-bit GPR) fields.  */
   struct
   {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
     uint64_t lower;
     uint64_t upper;
 #else
@@ -303,7 +303,7 @@ typedef union
   } ulong;
 } __VEC_U_128;
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
 /*! \brief Arrange elements of dword initializer in high->low order.  */
 #define CONST_VINT64_DW(__dw0, __dw1) {__dw1, __dw0}
 /*! \brief Initializer for 128-bits vector, as two unsigned long long

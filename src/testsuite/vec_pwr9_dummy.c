@@ -21,7 +21,7 @@
  */
 
 //#pragma GCC push target
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
 //#pragma GCC target ("cpu=power9")
 #include <stdint.h>
 #include <stdio.h>
@@ -607,7 +607,7 @@ test_vec_iszerof32_PWR9 (vf32_t value)
   return (vec_iszerof32 (value));
 }
 
-#if (defined(PVECLIB_LITTLE_ENDIAN))
+#if (defined (PVECLIB_LITTLE_ENDIAN))
 int
 test_vec_all_finitef64_PWR9 (vf64_t value)
 {

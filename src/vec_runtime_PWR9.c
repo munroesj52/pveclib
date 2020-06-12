@@ -20,7 +20,7 @@
       Created on: Aug 20, 2019
  */
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
 /* Older Linux distros running Big Endian are unlikely to support PWR9.
  * So build PWR9 runtime for LE only.  */
 

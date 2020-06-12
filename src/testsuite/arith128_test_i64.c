@@ -1193,7 +1193,7 @@ test_revbd (void)
   printf ("\ntest_revbd Reverse Bytes in Doublewords\n");
 
   i = (vui32_t ) { 0, 1, 2, 3 };
-#if defined(PVECLIB_BIG_ENDIAN)
+#if defined (PVECLIB_BIG_ENDIAN)
   e = (vui32_t )CONST_VINT32_W(0x01000000, 0x00000000, 0x03000000, 0x02000000);
 #else
   e = (vui32_t)CONST_VINT32_W(0x02000000, 0x03000000, 0x00000000, 0x01000000);
@@ -1218,7 +1218,7 @@ test_revbd (void)
 
   ip = (vui32_t*) mem;
   i = *ip;
-#if defined(PVECLIB_BIG_ENDIAN)
+#if defined (PVECLIB_BIG_ENDIAN)
   e = (vui32_t )CONST_VINT32_W(0xe3e2e1e0, 0xf3f2f1f0, 0xc3c2c1c0, 0xd3d2d1d0);
 #else
   e = (vui32_t)CONST_VINT32_W(0xd0d1d2d3, 0xc0c1c2c3, 0xf0f1f2f3, 0xe0e1e2e3);

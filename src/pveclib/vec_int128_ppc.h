@@ -242,7 +242,7 @@
  * For example:
  * \code
    const vui128_t invmul = (vui128_t) (vector unsigned long long)
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
                      { 0xd30baf9a1e626a6dUL, 0x39a5652fb1137856UL };
 #else
                      { 0x39a5652fb1137856UL, 0xd30baf9a1e626a6dUL };
@@ -251,7 +251,7 @@
  * or
  * \code
    const vui128_t invmul = (vui128_t) (vector unsigned int)
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
                      { 0x1e626a6d, 0xd30baf9a, 0xb1137856, 0x39a5652f };
 #else
                      { 0x39a5652f, 0xb1137856, 0xd30baf9a, 0x1e626a6d };
@@ -2504,7 +2504,7 @@ vec_clzq (vui128_t vra)
   vt3 = (vui64_t) vec_sld ((vui8_t) vzero, (vui8_t) vt2, 8);
   result = vec_andc (vt1, vt3);
   result = (vui64_t) vec_sums ((vi32_t) result, (vi32_t) vzero);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   result = (vui64_t) vec_sld ((vui8_t) result, (vui8_t) result, 4);
 #endif
 #else
@@ -2940,7 +2940,7 @@ int
 vec_cmpsq_all_eq (vi128_t vra, vi128_t vrb)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && defined (PVECLIB_LITTLE_ENDIAN)
   result = vec_all_eq((vui64_t)vra, (vui64_t)vrb);
 #else
   result = vec_all_eq((vui32_t)vra, (vui32_t)vrb);
@@ -3094,7 +3094,7 @@ int
 vec_cmpsq_all_ne (vi128_t vra, vi128_t vrb)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && defined (PVECLIB_LITTLE_ENDIAN)
   result = !vec_all_eq ((vui64_t) vra, (vui64_t) vrb);
 #else
   result = !vec_all_eq ((vui32_t) vra, (vui32_t) vrb);
@@ -3124,7 +3124,7 @@ int
 vec_cmpuq_all_eq (vui128_t vra, vui128_t vrb)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && defined (PVECLIB_LITTLE_ENDIAN)
   result = vec_all_eq ((vui64_t) vra, (vui64_t) vrb);
 #else
   result = vec_all_eq ((vui32_t) vra, (vui32_t) vrb);
@@ -3262,7 +3262,7 @@ int
 vec_cmpuq_all_ne (vui128_t vra, vui128_t vrb)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && defined (PVECLIB_LITTLE_ENDIAN)
   result = !vec_all_eq ((vui64_t) vra, (vui64_t) vrb);
 #else
   result = !vec_all_eq ((vui32_t) vra, (vui32_t) vrb);
@@ -3306,7 +3306,7 @@ vec_cmul10ecuq (vui128_t *cout, vui128_t a, vui128_t cin)
   vui32_t t_odd, t_even, t_high;
   vui32_t z = { 0, 0, 0, 0 };
   t10 = vec_splat_u16(10);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   t_even = vec_vmulouh (ts, t10);
   t_odd = vec_vmuleuh (ts, t10);
 #else
@@ -3367,7 +3367,7 @@ vec_cmul10cuq (vui128_t *cout, vui128_t a)
   vui32_t t_odd, t_even, t_high;
   vui32_t z = { 0, 0, 0, 0 };
   t10 = vec_splat_u16(10);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   t_even = vec_vmulouh (ts, t10);
   t_odd = vec_vmuleuh (ts, t10);
 #else
@@ -4019,7 +4019,7 @@ vec_mul10cuq (vui128_t a)
   vui32_t t_even, t_odd, t_high;
   vui32_t z = { 0, 0, 0, 0 };
   t10 = vec_splat_u16(10);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   t_even = vec_vmulouh (ts, t10);
   t_odd = vec_vmuleuh (ts, t10);
 #else
@@ -4079,7 +4079,7 @@ vec_mul10ecuq (vui128_t a, vui128_t cin)
   vui32_t t_even, t_high;
   vui32_t z = { 0, 0, 0, 0 };
   t10 = vec_splat_u16(10);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   t_even = vec_vmulouh (ts, t10);
   t_odd = vec_vmuleuh (ts, t10);
 #else
@@ -4139,7 +4139,7 @@ vec_mul10euq (vui128_t a, vui128_t cin)
   vui32_t t_odd, t_even;
   vui32_t z = { 0, 0, 0, 0 };
   t10 = vec_splat_u16(10);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   t_even = vec_vmulouh (ts, t10);
   t_odd = vec_vmuleuh (ts, t10);
 #else
@@ -4190,7 +4190,7 @@ vec_mul10uq (vui128_t a)
   vui32_t t_odd, t_even;
   vui32_t z = { 0, 0, 0, 0 };
   t10 = vec_splat_u16(10);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   t_even = vec_vmulouh (ts, t10);
   t_odd = vec_vmuleuh (ts, t10);
 #else
@@ -4246,7 +4246,7 @@ vec_cmul100cuq (vui128_t *cout, vui128_t a)
   vui32_t t_odd, t_even, t_high;
   vui32_t z = { 0, 0, 0, 0 };
   //t100 = vec_splat_u16 (100);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   t_even = vec_vmulouh (ts, t100);
   t_odd = vec_vmuleuh (ts, t100);
 #else
@@ -4314,7 +4314,7 @@ vec_cmul100ecuq (vui128_t *cout, vui128_t a, vui128_t cin)
   vui32_t t_odd, t_even, t_high;
   vui32_t z = { 0, 0, 0, 0 };
   //t100 = vec_splat_u16 (100);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   t_even = vec_vmulouh (ts, t100);
   t_odd = vec_vmuleuh (ts, t100);
 #else
@@ -4409,7 +4409,7 @@ vec_msumudm (vui64_t a, vui64_t b, vui128_t c)
 static inline vui128_t
 vec_muleud (vui64_t a, vui64_t b)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_vmuloud (a, b);
 #else
   return vec_vmuleud (a, b);
@@ -4468,7 +4468,7 @@ vec_mulhud (vui64_t vra, vui64_t vrb)
 static inline vui128_t
 vec_muloud (vui64_t a, vui64_t b)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_vmuleud (a, b);
 #else
   return vec_vmuloud (a, b);
@@ -5433,7 +5433,7 @@ vec_popcntq (vui128_t vra)
   result = (vui64_t) vec_sums ((vi32_t) x, (vi32_t) z);
 #endif
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   result = (vui64_t) vec_sld (
       (vui8_t) result, (vui8_t) result, 4);
 #endif
@@ -5468,7 +5468,7 @@ vec_revbq (vui128_t vra)
       : );
 #endif
 #else
-#if defined(PVECLIB_BIG_ENDIAN)
+#if defined (PVECLIB_BIG_ENDIAN)
   const vui64_t vconstp =
       CONST_VINT64_DW(0x0F0E0D0C0B0A0908UL, 0x0706050403020100UL);
 #else
@@ -6312,7 +6312,7 @@ vec_vmuleud (vui64_t a, vui64_t b)
   vui32_t m0, m1;
 
 // Need the endian invariant merge word high here
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
 // Nullify the little endian transform
   m0 = vec_mergel ((vui32_t) b, (vui32_t) b);
 #else
@@ -6554,7 +6554,7 @@ vec_vmuloud (vui64_t a, vui64_t b)
   vui32_t m0, m1;
 
   // Need the endian invariant merge word low here
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   // Nullify the little endian transform
   m0 = vec_mergeh ((vui32_t) b, (vui32_t) b);
 #else

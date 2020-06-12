@@ -666,7 +666,7 @@ vec_mul10uq (vui128_t a)
   vui32_t t_odd, t_even;
   vui32_t z = { 0, 0, 0, 0 };
   t10 = vec_splat_u16(10);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   t_even = vec_vmulouh (ts, t10);
   t_odd = vec_vmuleuh (ts, t10);
 #else
@@ -717,7 +717,7 @@ vec_mul10uq (vui128_t a)
 *
 *  Notice also the conditional code for endian around the
 *  <B>vec_vmulouh</B> and <B>vec_vmuleuh</B> built-ins: \code
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
 *  \endcode
 *
 *  Little endian (<B>LE</B>) changes the element numbering.

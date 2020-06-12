@@ -182,7 +182,7 @@ vec_mrgahw (vui64_t vra, vui64_t vrb)
   vui32_t res;
 #ifdef _ARCH_PWR8
 #ifdef vec_vmrgew // Use altivec.h builtins
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   // really want vmrgew here! So do the opposite.
   res = vec_vmrgow ((vui32_t)vrb, (vui32_t)vra);
 #else
@@ -214,7 +214,7 @@ vec_mrgahw (vui64_t vra, vui64_t vrb)
 static inline vui32_t
 vec_mulhuw (vui32_t vra, vui32_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_mrgahw (vec_mulouw (vra, vrb), vec_muleuw (vra, vrb));
 #else
   return vec_mrgahw (vec_muleuw (vra, vrb), vec_mulouw (vra, vrb));
@@ -565,7 +565,7 @@ vec_mrgahw (vui64_t vra, vui64_t vrb)
   vui32_t res;
 #ifdef _ARCH_PWR8
 #ifdef vec_vmrgew
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   res = vec_vmrgow ((vui32_t)vrb, (vui32_t)vra);
 #else
   res = vec_vmrgew ((vui32_t)vra, (vui32_t)vrb);
@@ -615,7 +615,7 @@ vec_mrgalw (vui64_t vra, vui64_t vrb)
   vui32_t res;
 #ifdef _ARCH_PWR8
 #ifdef vec_vmrgow
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   res = vec_vmrgew ((vui32_t)vrb, (vui32_t)vra);
 #else
   res = vec_vmrgow ((vui32_t)vra, (vui32_t)vrb);
@@ -668,7 +668,7 @@ vec_mrgew (vui32_t vra, vui32_t vrb)
   res = vec_vmrgew (vra, vrb);
 #else
   __asm__(
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
       "vmrgow %0,%2,%1;\n"
 #else
       "vmrgew %0,%1,%2;\n"
@@ -718,7 +718,7 @@ vec_mrgow (vui32_t vra, vui32_t vrb)
   res = vec_vmrgow (vra, vrb);
 #else
   __asm__(
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
       "vmrgew %0,%2,%1;\n"
 #else
       "vmrgow %0,%1,%2;\n"
@@ -770,7 +770,7 @@ vec_mulesw (vi32_t a, vi32_t b)
   res = vec_mule (a, b);
 #else
   __asm__(
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
       "vmulosw %0,%1,%2;\n"
 #else
       "vmulesw %0,%1,%2;\n"
@@ -840,11 +840,11 @@ vec_mulosw (vi32_t a, vi32_t b)
   vi64_t res;
 #ifdef _ARCH_PWR8
   // The vector vmulosw/vmulesw instructions introduced in PRW8
-#if defined __GNUC__ && (__GNUC__ > 7) && (defined(PVECLIB_LITTLE_ENDIAN))
+#if defined __GNUC__ && (__GNUC__ > 7) && defined (PVECLIB_LITTLE_ENDIAN)
   res = vec_mulo (a, b);
 #else
   __asm__(
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
       "vmulesw %0,%1,%2;\n"
 #else
       "vmulosw %0,%1,%2;\n"
@@ -916,7 +916,7 @@ vec_mulosw (vi32_t a, vi32_t b)
 static inline vui64_t
 vec_muleuw (vui32_t a, vui32_t b)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_vmulouw (a, b);
 #else
   return vec_vmuleuw (a, b);
@@ -952,7 +952,7 @@ vec_muleuw (vui32_t a, vui32_t b)
 static inline vui64_t
 vec_mulouw (vui32_t a, vui32_t b)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_vmuleuw (a, b);
 #else
   return vec_vmulouw (a, b);
@@ -978,7 +978,7 @@ vec_mulouw (vui32_t a, vui32_t b)
 static inline vi32_t
 vec_mulhsw (vi32_t vra, vi32_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return (vi32_t) vec_mrgahw ((vui64_t) vec_mulosw (vra, vrb),
 			      (vui64_t) vec_mulesw (vra, vrb));
 #else
@@ -1012,7 +1012,7 @@ vec_mulhsw (vi32_t vra, vi32_t vrb)
 static inline vui32_t
 vec_mulhuw (vui32_t vra, vui32_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_mrgahw (vec_mulouw (vra, vrb), vec_muleuw (vra, vrb));
 #else
   return vec_mrgahw (vec_muleuw (vra, vrb), vec_mulouw (vra, vrb));
@@ -1152,7 +1152,7 @@ vec_revbw (vui32_t vra)
 #endif
 #else
   const vui64_t vconstp =
-#if defined(PVECLIB_BIG_ENDIAN)
+#if defined (PVECLIB_BIG_ENDIAN)
       CONST_VINT64_DW(0x0302010007060504UL, 0x0B0A09080F0E0D0CUL);
 #else
       CONST_VINT64_DW(0x0C0D0E0F08090A0BUL, 0x0405060700010203UL);
@@ -1384,7 +1384,7 @@ vec_vmuleuw (vui32_t vra, vui32_t vrb)
   vui64_t res;
 #ifdef _ARCH_PWR8
 #if defined __GNUC__ && (__GNUC__ > 7)
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   res = vec_mulo (vra, vrb);
 #else
   res = vec_mule (vra, vrb);
@@ -1488,7 +1488,7 @@ vec_vmulouw (vui32_t vra, vui32_t vrb)
 #ifdef _ARCH_PWR8
 #if defined __GNUC__ && (__GNUC__ > 7)
   /* Not supported in GCC yet.  ETA GCC-8.  */
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   res = vec_mule (vra, vrb);
 #else
   res = vec_mulo (vra, vrb);

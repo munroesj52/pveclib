@@ -152,7 +152,7 @@ test_mulhw (vui16_t vra, vui16_t vrb)
 static inline vui16_t
 vec_vmrgeh (vui16_t vra, vui16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   vui16_t permute =
       { 0x0302,0x1312, 0x0706,0x1716, 0x0B0A,0x1B1A, 0x0F0E,0x1F1E };
 
@@ -183,7 +183,7 @@ vec_vmrgeh (vui16_t vra, vui16_t vrb)
 static inline vui16_t
 vec_mrgeh  (vui16_t vra, vui16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_vmrgoh ((vui16_t) vrb, (vui16_t) vra);
 #else
   return vec_vmrgeh ((vui16_t) vra, (vui16_t) vrb);
@@ -213,7 +213,7 @@ vec_mrgahh  (vui32_t vra, vui32_t vrb)
 static inline vui16_t
 vec_mulhuh (vui16_t vra, vui16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_mrgahh (vec_mulo (vra, vrb), vec_mule (vra, vrb));
 #else
   return vec_mrgahh (vec_mule (vra, vrb), vec_mulo (vra, vrb));
@@ -232,7 +232,7 @@ vec_mulhuh (vui16_t vra, vui16_t vrb)
 static inline vui16_t
 vec_muluhm (vui16_t vra, vui16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_mrgalh (vec_mulo (vra, vrb), vec_mule (vra, vrb));
 #else
   return vec_mrgalh (vec_mule (vra, vrb), vec_mulo (vra, vrb));
@@ -688,7 +688,7 @@ vec_mrgalh  (vui32_t vra, vui32_t vrb)
 static inline vui16_t
 vec_mrgeh  (vui16_t vra, vui16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_vmrgoh ( vrb, vra );
 #else
   return vec_vmrgeh ( vra, vrb );
@@ -716,7 +716,7 @@ vec_mrgeh  (vui16_t vra, vui16_t vrb)
 static inline vui16_t
 vec_mrgoh  (vui16_t vra, vui16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_vmrgeh ( vrb, vra );
 #else
   return vec_vmrgoh ( vra, vrb );
@@ -742,7 +742,7 @@ vec_mrgoh  (vui16_t vra, vui16_t vrb)
 static inline vi16_t
 vec_mulhsh (vi16_t vra, vi16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return (vi16_t) vec_mrgahh ((vui32_t)vec_mulo (vra, vrb),
 			      (vui32_t)vec_mule (vra, vrb));
 #else
@@ -770,7 +770,7 @@ vec_mulhsh (vi16_t vra, vi16_t vrb)
 static inline vui16_t
 vec_mulhuh (vui16_t vra, vui16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_mrgahh (vec_mulo (vra, vrb), vec_mule (vra, vrb));
 #else
   return vec_mrgahh (vec_mule (vra, vrb), vec_mulo (vra, vrb));
@@ -799,7 +799,7 @@ vec_mulhuh (vui16_t vra, vui16_t vrb)
 static inline vui16_t
 vec_muluhm (vui16_t vra, vui16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   return vec_mrgalh (vec_mulo (vra, vrb), vec_mule (vra, vrb));
 #else
   return vec_mrgalh (vec_mule (vra, vrb), vec_mulo (vra, vrb));
@@ -919,7 +919,7 @@ vec_revbh (vui16_t vra)
       : );
 #endif
 #else
-#if defined(PVECLIB_BIG_ENDIAN)
+#if defined (PVECLIB_BIG_ENDIAN)
   const vui64_t vconstp = CONST_VINT64_DW(0x0100030205040706UL, 0x09080B0A0D0C0F0EUL);
 #else
   const vui64_t vconstp =
@@ -1100,7 +1100,7 @@ vec_vmaddeuh (vui16_t a, vui16_t b, vui16_t c)
   const vui16_t zero = { 0, 0, 0, 0,  0, 0, 0, 0 };
   vui32_t res;
   vui16_t c_euh = vec_mrgahh ((vui32_t) zero, (vui32_t) c);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   res = vec_vmulouh (a, b);
 #else
   res = vec_vmuleuh (a, b);
@@ -1136,7 +1136,7 @@ vec_vmaddouh (vui16_t a, vui16_t b, vui16_t c)
   const vui16_t zero = { 0, 0, 0, 0,  0, 0, 0, 0 };
   vui32_t res;
   vui16_t c_ouh = vec_mrgalh ((vui32_t) zero, (vui32_t) c);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   res = vec_vmuleuh (a, b);
 #else
   res = vec_vmulouh (a, b);
@@ -1175,7 +1175,7 @@ vec_vmaddouh (vui16_t a, vui16_t b, vui16_t c)
 static inline vui16_t
 vec_vmrgeh (vui16_t vra, vui16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   const vui16_t permute =
       { 0x0302,0x1312, 0x0706,0x1716, 0x0B0A,0x1B1A, 0x0F0E,0x1F1E };
   return vec_perm (vrb, vra, (vui8_t)permute);
@@ -1217,7 +1217,7 @@ vec_vmrgeh (vui16_t vra, vui16_t vrb)
 static inline vui16_t
 vec_vmrgoh (vui16_t vra, vui16_t vrb)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   const vui16_t permute =
       { 0x0100,0x1110, 0x0504,0x1514, 0x0908,0x1918, 0x0D0C,0x1D1C };
   return vec_perm (vrb, vra, (vui8_t)permute);

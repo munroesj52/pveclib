@@ -346,7 +346,7 @@ print_ibm128 (char *prefix, long double ldbl)
   __VEC_U_128 t;
 
   t.ldbl128 = ldbl;
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   high = t.vf2 [1];
   low = t.vf2 [0];
 #else
@@ -366,7 +366,7 @@ print_ibm128x (char *prefix, long double ldbl)
   __VEC_U_128 t;
 
   t.ldbl128 = ldbl;
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   high = t.vf2 [1];
   low = t.vf2 [0];
 #else
@@ -403,7 +403,7 @@ print_int128_carry (char *prefix,
 void
 print_vint32d (char *prefix, vui32_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%10d,%10d,%10d,%10d\n", prefix, val[3], val[2], val[1], val[0]);
 #else
   printf ("%s%10d,%10d,%10d,%10d\n", prefix, val[0], val[1], val[2], val[3]);
@@ -413,7 +413,7 @@ print_vint32d (char *prefix, vui32_t val)
 void
 print_vint32x (char *prefix, vui32_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%08x,%08x,%08x,%08x\n", prefix, val[3], val[2], val[1], val[0]);
 #else
   printf ("%s%08x,%08x,%08x,%08x\n", prefix, val[0], val[1], val[2], val[3]);
@@ -423,7 +423,7 @@ print_vint32x (char *prefix, vui32_t val)
 void
 print_vint16d (char *prefix, vui16_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%5d,%5d,%5d,%5d,%5d,%5d,%5d,%5d\n", prefix, val[7], val[6], val[5],
 	  val[4], val[3], val[2], val[1], val[0]);
 #else
@@ -435,7 +435,7 @@ print_vint16d (char *prefix, vui16_t val)
 void
 print_vint16x (char *prefix, vui16_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%04x,%04x,%04x,%04x,%04x,%04x,%04x,%04x\n", prefix, val[7], val[6],
 	  val[5], val[4], val[3], val[2], val[1], val[0]);
 #else
@@ -456,7 +456,7 @@ print_vint8 (char *prefix, vui8_t val)
 void
 print_vint8c (char *prefix, vui8_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%c,%c,%c,%c,%c,%c,%c,%c,%c,%c,%c,%c,%c,%c,%c,%c\n", prefix,
 	  val[15],val[14], val[13], val[12], val[11], val[10], val[9], val[8],
 	  val[7], val[6], val[5], val[4], val[3], val[2], val[1], val[0]);
@@ -470,7 +470,7 @@ print_vint8c (char *prefix, vui8_t val)
 void
 print_vint8x (char *prefix, vui8_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf (
       "%s%02x,%02x,%02x,%02x,%02x,%02x,%02x,%02x,%02x,%02x,%02x,%02x,%02x,%02x,%02x,%02x\n",
       prefix, val[15],val[14], val[13], val[12], val[11], val[10], val[9], val[8],
@@ -486,7 +486,7 @@ print_vint8x (char *prefix, vui8_t val)
 void
 print_vint8d (char *prefix, vui8_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%3d,%3d,%3d,%3d,%3d,%3d,%3d,%3d,%3d,%3d,%3d,%3d,%3d,%3d,%3d,%3d\n",
 	  prefix, val[15],val[14], val[13], val[12], val[11], val[10], val[9], val[8],
 	  val[7], val[6], val[5], val[4], val[3], val[2], val[1], val[0]);
@@ -531,7 +531,7 @@ print_vbool8 (char *prefix, vui8_t val)
 void
 print_v4f32 (char *prefix, vf32_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %8.3f,%8.3f,%8.3f,%8.3f\n", prefix, val[3], val[2], val[1], val[0]);
 #else
   printf ("%s %8.3f,%8.3f,%8.3f,%8.3f\n", prefix, val[0], val[1], val[2], val[3]);
@@ -541,7 +541,7 @@ print_v4f32 (char *prefix, vf32_t val)
 void
 print_v4f32x (char *prefix, vf32_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %16.6a,%16.6a,%16.6a,%16.6a\n", prefix, val[3], val[2], val[1], val[0]);
 #else
   printf ("%s %16.6a,%16.6a,%16.6a,%16.6a\n", prefix, val[0], val[1], val[2], val[3]);
@@ -557,7 +557,7 @@ print_v4b32c (char *prefix, vb32_t val)
 
   text = vec_sel (false, true, val);
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %c,%c,%c,%c\n", prefix, text[3], text[2], text[1], text[0]);
 #else
   printf ("%s %c,%c,%c,%c\n", prefix, text[0], text[1], text[2], text[3]);
@@ -569,7 +569,7 @@ print_v4b32x (char *prefix, vb32_t boolval)
 {
   vui32_t val = (vui32_t)boolval;
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %08x,%08x,%08x,%08x\n", prefix, val[3], val[2], val[1], val[0]);
 #else
   printf ("%s %08x,%08x,%08x,%08x\n", prefix, val[0], val[1], val[2], val[3]);
@@ -579,7 +579,7 @@ print_v4b32x (char *prefix, vb32_t boolval)
 void
 print_v2f64 (char *prefix, vf64_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %16.6f,%16.6f\n", prefix, val[1], val[0]);
 #else
   printf ("%s %16.6f,%16.6f\n", prefix, val[0], val[1]);
@@ -589,7 +589,7 @@ print_v2f64 (char *prefix, vf64_t val)
 void
 print_v2f64x (char *prefix, vf64_t val)
 {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %22.13a,%22.13a\n", prefix, val[1], val[0]);
 #else
   printf ("%s %22.13a,%22.13a\n", prefix, val[0], val[1]);
@@ -605,7 +605,7 @@ print_v2b64c (char *prefix, vb64_t val)
 
   text = vec_sel (false, true, val);
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %c,%c\n", prefix, (int)text[1], (int)text[0]);
 #else
   printf ("%s %c,%c\n", prefix, (int)text[0], (int)text[1]);
@@ -617,7 +617,7 @@ print_v2b64x (char *prefix, vb64_t boolval)
 {
   vui64_t val = (vui64_t)boolval;
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %016llx,%016llx\n", prefix, val[1], val[0]);
 #else
   printf ("%s %016llx,%016llx\n", prefix, val[0], val[1]);
@@ -629,7 +629,7 @@ print_v2int64 (char *prefix, vui64_t val128)
 {
   vui64_t val = (vui64_t) val128;
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %lld,%lld\n", prefix, val[1], val[0]);
 #else
   printf ("%s %lld,%lld\n", prefix, val[0], val[1]);
@@ -641,7 +641,7 @@ print_v2xint64 (char *prefix, vui64_t val128)
 {
   vui64_t val = (vui64_t) val128;
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %016llx,%016llx\n", prefix, val[1], val[0]);
 #else
   printf ("%s %016llx,%016llx\n", prefix, val[0], val[1]);
@@ -673,7 +673,7 @@ void
 print_vint128x (char *prefix, vui128_t val128)
 {
   vui32_t val = (vui32_t) val128;
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%08x%08x%08x%08x\n", prefix, val[3], val[2], val[1], val[0]);
 #else
   printf("%s%08x%08x%08x%08x\n", prefix, val[0], val[1], val[2], val[3]);
@@ -685,7 +685,7 @@ print_vint256 (char *prefix, vui128_t val0_128, vui128_t val1_128)
 {
   vui32_t val0 = (vui32_t) val0_128;
   vui32_t val1 = (vui32_t) val1_128;
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%08x%08x%08x%08x %08x%08x%08x%08x\n", prefix,
 	  val0[3], val0[2], val0[1], val0[0],
 	  val1[3], val1[2], val1[1], val1[0]);
@@ -713,7 +713,7 @@ print_vuint512x (char *prefix, vui128_t val0_128, vui128_t val1_128, vui128_t va
   pad [len] = 0;
 
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%08x%08x%08x%08x %08x%08x%08x%08x\n", prefix,
 	  val0[3], val0[2], val0[1], val0[0],
 	  val1[3], val1[2], val1[1], val1[0]);
@@ -739,7 +739,7 @@ print_vb128c (char *prefix, vb128_t val)
 
   text = vec_sel (false, true, (vb64_t) val);
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s %c%c\n", prefix, (int) text[1], (int) text[0]);
 #else
   printf ("%s %c%c\n", prefix, (int) text[0], (int) text[1]);
@@ -760,7 +760,7 @@ print_vint384 (char *prefix, vui128_t val0_128, vui128_t val1_128,
   vui32_t val0 = (vui32_t) val0_128;
   vui32_t val1 = (vui32_t) val1_128;
   vui32_t val2 = (vui32_t) val2_128;
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%08x%08x%08x%08x %08x%08x%08x%08x %08x%08x%08x%08x\n", prefix,
 	  val0[3], val0[2], val0[1], val0[0],
 	  val1[3], val1[2], val1[1], val1[0],
@@ -841,7 +841,7 @@ print_vint512x (char *prefix, __VEC_U_512 r)
   pad [len] = 0;
 
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf ("%s%08x%08x%08x%08x %08x%08x%08x%08x\n", prefix,
 	  val0[3], val0[2], val0[1], val0[0],
 	  val1[3], val1[2], val1[1], val1[0]);
@@ -948,7 +948,7 @@ print_vfloat128x (char *prefix, __binary128 val128)
   hidden = 0;
 #if 0
   printf ("\tsign=%d, bexp=%04x, exp=%d\n", sign, bexp, exp);
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
   printf("\t%08x%08x%08x%08x\n", val[3], val[2], val[1], val[0]);
 #else
   printf("\t%08x%08x%08x%08x\n", val[0], val[1], val[2], val[3]);
@@ -974,7 +974,7 @@ print_vfloat128x (char *prefix, __binary128 val128)
 
   if (bexp != 0x7fff)
     {
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
       printf ("%s %c%d.%04x%08x%08x%08xp%+d\n", prefix, signc, hidden, val[3],
               val[2], val[1], val[0], exp);
 #else

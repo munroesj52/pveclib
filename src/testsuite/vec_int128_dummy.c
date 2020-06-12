@@ -1000,7 +1000,7 @@ test_mul4uq (vui128_t *__restrict__ mulu, vui128_t m1h, vui128_t m1l,
   mulu[3] = mphh;
 }
 
-#if defined(PVECLIB_LITTLE_ENDIAN)
+#if defined (PVECLIB_LITTLE_ENDIAN)
 #define __NDX(__index) (__index)
 #define __MDX(__index) (__index)
 #define __PDX(__index) (__index)
