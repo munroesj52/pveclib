@@ -492,7 +492,7 @@
  * \code
  typedef struct
 {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   vui128_t vx0;
   vui128_t vx1;
   vui128_t vx2;
@@ -1116,7 +1116,7 @@ const __VEC_U_512  vec512_ten128th = CONST_VINT512_Q
  * \endcode
  *
  */
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
 #define CONST_VINT512_Q(__q0, __q1, __q2, __q3) {__q3, __q2, __q1, __q0}
 #else
 #define CONST_VINT512_Q(__q0, __q1, __q2, __q3) {__q0, __q1, __q2, __q3}
@@ -1132,7 +1132,7 @@ const __VEC_U_512  vec512_ten128th = CONST_VINT512_Q
 typedef struct
 {
   ///@cond INTERNAL
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   vui128_t vx0;
   vui128_t vx1;
 #else
@@ -1151,7 +1151,7 @@ typedef struct
 typedef struct
 {
   ///@cond INTERNAL
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   vui128_t vx0;
   vui128_t vx1;
   vui128_t vx2;
@@ -1176,7 +1176,7 @@ typedef struct
 typedef struct
 {
   ///@cond INTERNAL
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   vui128_t vx0;
   vui128_t vx1;
   vui128_t vx2;
@@ -1213,7 +1213,7 @@ typedef union
   __VEC_U_640 x640;
   struct
   {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
     __VEC_U_512 v0x512;
     vui128_t v1x128;
 #else
@@ -1223,7 +1223,7 @@ typedef union
   } x2;
   struct
   {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
     vui128_t v1x128;
     __VEC_U_512 v0x512;
 #else
@@ -1243,7 +1243,7 @@ typedef union
 typedef struct
 {
   ///@cond INTERNAL
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   vui128_t vx0;
   vui128_t vx1;
   vui128_t vx2;
@@ -1280,7 +1280,7 @@ typedef struct
 typedef struct
 {
   ///@cond INTERNAL
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   vui128_t vx0;
   vui128_t vx1;
   vui128_t vx2;
@@ -1317,7 +1317,7 @@ typedef struct
 typedef struct
 {
   ///@cond INTERNAL
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   vui128_t vx0;
   vui128_t vx1;
   vui128_t vx2;
@@ -1373,7 +1373,7 @@ typedef union
   __VEC_U_1024 x1024;
   struct
   {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
     __VEC_U_512 v0x512;
     __VEC_U_512 v1x512;
 #else
@@ -1407,7 +1407,7 @@ typedef union
   __VEC_U_2048 x2048;
   struct
   {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
     __VEC_U_1024 v0x1024;
     __VEC_U_1024 v1x1024;
 #else
@@ -1417,7 +1417,7 @@ typedef union
   } x2;
   struct
   {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
     __VEC_U_512 v0x512;
     __VEC_U_512 v1x512;
     __VEC_U_512 v2x512;
@@ -1447,7 +1447,7 @@ typedef union
 typedef struct
 {
   ///@cond INTERNAL
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   vui128_t vx0;
   vui128_t vx1;
   vui128_t vx2;
@@ -1500,7 +1500,7 @@ typedef struct
 typedef struct
 {
   ///@cond INTERNAL
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   vui128_t vx0;
   vui128_t vx1;
   vui128_t vx2;
@@ -1593,7 +1593,7 @@ typedef union
   __VEC_U_4096 x4096;
   struct
   {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
     __VEC_U_2048 v0x2048;
     __VEC_U_2048 v1x2048;
 #else
@@ -1603,7 +1603,7 @@ typedef union
   } x2;
   struct
   {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
     __VEC_U_1024 v0x1024;
     __VEC_U_1024 v1x1024;
     __VEC_U_1024 v2x1024;
@@ -1617,7 +1617,7 @@ typedef union
   } x4;
   struct
   {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
     __VEC_U_512 v0x512;
     __VEC_U_512 v1x512;
     __VEC_U_512 v2x512;

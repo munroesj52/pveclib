@@ -53,7 +53,7 @@
 #include <pveclib/vec_int512_ppc.h>
 
 /*! \brief Macro to expand the parameterize resolver. */
-#if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+#if defined(PVECLIB_BIG_ENDIAN)
 #ifdef  __BUILTIN_CPU_SUPPORTS__
 #define VEC_DYN_RESOLVER(FNAME) \
   if (__builtin_cpu_is ("power8")) \
@@ -64,7 +64,7 @@
 #define VEC_DYN_RESOLVER(__FNAME) \
    return __FNAME ## _PWR7;
 #endif
-#else // __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#else // defined(PVECLIB_LITTLE_ENDIAN)
 #ifdef  __BUILTIN_CPU_SUPPORTS__
 #define VEC_DYN_RESOLVER(FNAME) \
   if (__builtin_cpu_is ("power9")) \
@@ -78,7 +78,7 @@
 #endif
 
 
-#if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+#if defined(PVECLIB_BIG_ENDIAN)
 // POWER7 supports only BIG Endian. So declare PWR7 externs only for BE.
 
 extern __VEC_U_256
@@ -138,7 +138,7 @@ vec_mul512_byMN_PWR8 (__VEC_U_512 *p,
                   __VEC_U_512 *m1, __VEC_U_512 *m2,
 		  unsigned long M, unsigned long N);
 
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
 /* Older distros running Big Endian are unlikely to support PWR9.
  * So declare PWR9 externs only for LE.  */
 

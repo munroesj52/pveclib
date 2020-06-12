@@ -654,7 +654,7 @@ test_mul512x128_MN (void)
   vui128_t j;
   int rc = 0;
 
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   kp = &k.vx0;
   ip = &i.vx0;
   jp = &j;
@@ -1068,7 +1068,7 @@ test_mul512x512_MN (void)
   vui128_t *kp, *ip, *jp;
   int rc = 0;
 
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   kp = &k.vx0;
   ip = &i.vx0;
   jp = &j.vx0;
@@ -1712,7 +1712,7 @@ test_mul1024x1024 (void)
 }
 //#undef __DEBUG_PRINT__
 
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
 #define __NDX16(__index) (__index)
 #else
 #define __NDX16(__index) ((16 - 1) - (__index))
@@ -1728,7 +1728,7 @@ test_mul2048x2048_MN (void)
   __VEC_U_512 *kp, *ip, *jp;
   int rc = 0;
 
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   kp = &k.x8.v0x512;
   ip = &m1.x4.v0x512;
   jp = &m2.x4.v0x512;

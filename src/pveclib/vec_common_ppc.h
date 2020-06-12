@@ -157,7 +157,7 @@
  * To get correct results for both endians, one could code something
  * like this:
  * \code
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   const vui32_t signmask = { 0, 0, 0, 0x80000000 };
   const vui32_t expmask = { 0, 0, 0, 0x7fff0000 };
 #else
@@ -197,6 +197,20 @@
  * \sa \ref i32_endian_issues_0_0
  * \sa \ref mainpage_endian_issues_1_1
  */
+
+/*
+ * GCC on Linux uses __BYTE_ORDER__, __ORDER_LITTLE_ENDIAN__ and __BIG_ENDIAN__ macros.
+ * XLC on AIX uses __LITTLE_ENDIAN__ and __BIG_ENDIAN__ macros.
+ */
+#if (defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)) || defined(__LITTLE_ENDIAN__)
+/*! \brief Little-endian configuration. */
+# defined PVECLIB_LITTLE_ENDIAN 1
+#elif (defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__)) || defined(__BIG_ENDIAN__)
+/*! \brief Big-endian configuration. */
+# defined PVECLIB_BIG_ENDIAN 1
+#else
+# error "Endian is not defined"
+#endif
 
 /*! \brief vector of 8-bit unsigned char elements. */
 typedef __vector unsigned char vui8_t;
@@ -279,7 +293,7 @@ typedef union
   /*! \brief Struct of two unsigned long int (64-bit GPR) fields.  */
   struct
   {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
     uint64_t lower;
     uint64_t upper;
 #else
@@ -289,7 +303,7 @@ typedef union
   } ulong;
 } __VEC_U_128;
 
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
 /*! \brief Arrange elements of dword initializer in high->low order.  */
 #define CONST_VINT64_DW(__dw0, __dw1) {__dw1, __dw0}
 /*! \brief Initializer for 128-bits vector, as two unsigned long long

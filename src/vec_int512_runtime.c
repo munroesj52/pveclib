@@ -337,7 +337,7 @@ __VEC_PWR_IMP (vec_madd512x512a512) (__VEC_U_512 m1, __VEC_U_512 m2,
  * The high order quadword index is 1, 3, 7.
  *
  */
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
 #define __NDX2(__index) (__index)
 #define __NDX4(__index) (__index)
 #define __NDX8(__index) (__index)
@@ -657,7 +657,7 @@ __VEC_PWR_IMP (vec_mul2048x2048) (__VEC_U_4096* r4096,
 
 // Adjust the order of quadwords in multiple quadword precision value,
 // to match the endian order of the bytes in a quadword.
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
 #define __MDX(__index) (__index)
 #define __NDX(__index) (__index)
 #define __PDX(__index) (__index)

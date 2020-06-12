@@ -60,14 +60,14 @@ db_vec_ZN2i128 (vui8_t zone00, vui8_t zone16)
   print_vint8x ("32xZD      ", znd00);
   print_vint8x ("           ", znd16);
 
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   ones = vec_pack ((vui16_t) znd16, (vui16_t) znd00);
 #else
   ones = vec_pack ((vui16_t) znd00, (vui16_t) znd16);
 #endif
   print_vint8x ("ones       ", ones);
 
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   ten00 = vec_mulo (znd00, dx10);
   ten16 = vec_mulo (znd16, dx10);
   tens = vec_pack (ten16, ten00);
@@ -92,7 +92,7 @@ db_vec_BCD2i128 (vui8_t bcd32)
 {
   vui8_t result = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
   vui8_t e_perm =
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
     { 0x00, 0x10, 0x02, 0x12, 0x04, 0x14, 0x06, 0x16, 0x08, 0x18, 0x0a, 0x1a,
 	0x0c, 0x1c, 0x0e, 0x1e };
 #else
@@ -136,7 +136,7 @@ db_vec_BC100s2i128 (vui8_t bc100s16)
   print_vint16d ("           ", (vui16_t)bc100s16);
 
   k = vec_splats ((unsigned char)156);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   l = vec_vmuloub (bc100s16, k);
 #else
   l = vec_vmuleub (bc100s16, k);
@@ -161,7 +161,7 @@ db_vec_BC10ks2i128 (vui16_t bc10k8)
   print_vint32d ("           ", (vui32_t)bc10k8);
 
   k = vec_splats ((unsigned short)55536);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   l = vec_vmulouh (bc10k8, k);
 #else
   l = vec_vmuleuh (bc10k8, k);
@@ -186,7 +186,7 @@ db_vec_BC100ms2i128 (vui32_t bc100m4)
   print_v2int64 ("           ", (vui64_t)bc100m4);
 
   k = vec_splats ((unsigned int)4194967296);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   l = vec_mulouw (bc100m4, k);
 #else
   l = vec_muleuw (bc100m4, k);
@@ -756,7 +756,7 @@ db_vec_rdxcf10kh (vui16_t vra)
   high_digit = vra / 100;
   print_vint16d (" high digit", high_digit);
   c156 = vec_splats ((unsigned short) 156);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   x156 = vec_vmuleub ((vui8_t) high_digit, (vui8_t) c156);
 #else
   x156 = vec_vmuloub ((vui8_t) high_digit, (vui8_t) c156);
@@ -782,7 +782,7 @@ db_vec_rdxcf100mw (vui32_t vra)
   high_digit = vra / 10000;
   print_vint32d (" high digit", high_digit);
   c = vec_splats ((unsigned int) 55536);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   x = vec_vmuleuh ((vui16_t) high_digit, (vui16_t) c);
 #else
   x = vec_vmulouh ((vui16_t) high_digit, (vui16_t) c);
@@ -825,7 +825,7 @@ db_vec_rdxcf10E16d (vui64_t vra)
 #if 0
   x = vec_muludm (high_digit, c);
 #else
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   x = vec_muleuw ((vui32_t) high_digit, (vui32_t) c);
 #else
   x = vec_mulouw ((vui32_t) high_digit, (vui32_t) c);
@@ -868,7 +868,7 @@ db_vec_rdxcf10e32q (vui128_t vra)
 #if 0
   x = vec_muluqm (high_digit, c);
 #else
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   x = vec_muleud ((vui64_t) high_digit, (vui64_t) c);
 #else
   x = vec_muloud ((vui64_t) high_digit, (vui64_t) c);

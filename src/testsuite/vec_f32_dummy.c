@@ -339,7 +339,7 @@ test_vec_float_uint (vui32_t __A)
     return vec_float (__A);
   }
 #endif
-#if defined vec_float2  && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined vec_float2  && (defined(PVECLIB_LITTLE_ENDIAN))
 vf32_t
 test_vec_float2_long (vi64_t __A, vi64_t __B)
   {

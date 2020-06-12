@@ -479,7 +479,7 @@ vec_mrgalb  (vui16_t vra, vui16_t vrb)
 static inline vui8_t
 vec_mrgeb  (vui8_t vra, vui8_t vrb)
 {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   return vec_vmrgob ((vui8_t) vrb, (vui8_t) vra);
 #else
   return vec_vmrgeb ((vui8_t) vra, (vui8_t) vrb);
@@ -507,7 +507,7 @@ vec_mrgeb  (vui8_t vra, vui8_t vrb)
 static inline vui8_t
 vec_mrgob  (vui8_t vra, vui8_t vrb)
 {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   return vec_vmrgeb ((vui8_t) vrb, (vui8_t) vra);
 #else
   return vec_vmrgob ((vui8_t) vra, (vui8_t) vrb);
@@ -533,7 +533,7 @@ vec_mrgob  (vui8_t vra, vui8_t vrb)
 static inline vi8_t
 vec_mulhsb (vi8_t vra, vi8_t vrb)
 {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   return (vi8_t) vec_mrgahb ((vui16_t)vec_mulo (vra, vrb),
 			     (vui16_t)vec_mule (vra, vrb));
 #else
@@ -561,7 +561,7 @@ vec_mulhsb (vi8_t vra, vi8_t vrb)
 static inline vui8_t
 vec_mulhub (vui8_t vra, vui8_t vrb)
 {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   return vec_mrgahb (vec_mulo (vra, vrb), vec_mule (vra, vrb));
 #else
   return vec_mrgahb (vec_mule (vra, vrb), vec_mulo (vra, vrb));
@@ -594,7 +594,7 @@ vec_mulubm (vui8_t vra, vui8_t vrb)
 /* Generic vec_mul not supported for vector char until GCC 7.  */
   return vec_mul (vra, vrb);
 #else
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   return vec_mrgalb (vec_mulo (vra, vrb), vec_mule (vra, vrb));
 #else
   return vec_mrgalb (vec_mule (vra, vrb), vec_mulo (vra, vrb));
@@ -976,7 +976,7 @@ vec_tolower (vui8_t vec_str)
 static inline vui8_t
 vec_vmrgeb (vui8_t vra, vui8_t vrb)
 {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   const vui8_t permute =
     { 0x01, 0x11, 0x03, 0x13, 0x05, 0x15, 0x07, 0x17, 0x09, 0x19, 0x0B, 0x1B,
 	0x0D, 0x1D, 0x0F, 0x1F };
@@ -1030,7 +1030,7 @@ vec_vmrgeb (vui8_t vra, vui8_t vrb)
 static inline vui8_t
 vec_vmrgob (vui8_t vra, vui8_t vrb)
 {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   const vui8_t permute =
       { 0x00, 0x10, 0x02, 0x12, 0x04, 0x14, 0x06, 0x16, 0x08, 0x18, 0x0A, 0x1A,
   	0x0C, 0x1C, 0x0E, 0x1E};

@@ -398,7 +398,7 @@ vec_vmsumuwm (vui32_t vra, vui32_t vrb, vui64_t vrc)
 static inline vui128_t
 vec_muleud (vui64_t a, vui64_t b)
 {
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   return vec_vmuloud (a, b);
 #else
   return vec_vmuleud (a, b);
@@ -432,7 +432,7 @@ vec_vmuleud (vui64_t a, vui64_t b)
   vui32_t m0, m1;
 
   // Need the endian invariant merge word high here
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   // Nullify the little endian transform
   m0 = vec_mergel ((vui32_t) b, (vui32_t) b);
 #else
@@ -441,7 +441,7 @@ vec_vmuleud (vui64_t a, vui64_t b)
   m1 = (vui32_t) vec_xxspltd ((vui64_t) a, 0);
 
   // Need the endian invariant multiply even/odd word here
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   // Nullify the little endian transform
   p1 = vec_muleuw (m1, m0);
   p0 = vec_mulouw (m1, m0);
@@ -576,7 +576,7 @@ vec_muludm (vui64_t vra, vui64_t vrb)
   vui32_t t1;
 
   t1 = (vui32_t) vec_vrld (vrb, s32);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   // Nullify the little endian transform, really want mulouw here.
   t2 = vec_muleuw ((vui32_t) vra, (vui32_t) vrb);
 #else
@@ -680,7 +680,7 @@ vec_muludm (vui64_t vra, vui64_t vrb)
  * We use the swap doubleword operation in the implementation of
  * vec_cmpequq(), vec_cmpneuq(), vec_muludq(), and vec_mulluq().
  *
- * Then use the compilers <B>__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__</B>
+ * Then use the compilers <B>defined(PVECLIB_LITTLE_ENDIAN)</B>
  * conditional to invert the vec_permdi() select control for
  * endian sensitive merge/splat doubleword operations:
  * - Merge even/odd doubleword operations vec_mrged() and vec_mrgod().
@@ -1439,7 +1439,7 @@ int
 vec_cmpsd_all_eq (vi64_t a, vi64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_all_eq(a, b);
 #else
   result = vec_all_eq((vui32_t)a, (vui32_t)b);
@@ -1469,7 +1469,7 @@ int
 vec_cmpsd_all_ge (vi64_t a, vi64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_all_ge(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1501,7 +1501,7 @@ int
 vec_cmpsd_all_gt (vi64_t a, vi64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_all_gt(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1580,7 +1580,7 @@ int
 vec_cmpsd_all_ne (vi64_t a, vi64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_all_ne(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1611,7 +1611,7 @@ int
 vec_cmpsd_any_eq (vi64_t a, vi64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_any_eq(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1643,7 +1643,7 @@ int
 vec_cmpsd_any_ge (vi64_t a, vi64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_any_ge(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1675,7 +1675,7 @@ int
 vec_cmpsd_any_gt (vi64_t a, vi64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_any_gt(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1754,7 +1754,7 @@ int
 vec_cmpsd_any_ne (vi64_t a, vi64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_any_ne(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1785,7 +1785,7 @@ int
 vec_cmpud_all_eq (vui64_t a, vui64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_all_eq(a, b);
 #else
   result = vec_all_eq((vui32_t)a, (vui32_t)b);
@@ -1815,7 +1815,7 @@ int
 vec_cmpud_all_ge (vui64_t a, vui64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_all_ge(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1847,7 +1847,7 @@ int
 vec_cmpud_all_gt (vui64_t a, vui64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_all_gt(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1926,7 +1926,7 @@ int
 vec_cmpud_all_ne (vui64_t a, vui64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_all_ne(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1957,7 +1957,7 @@ int
 vec_cmpud_any_eq (vui64_t a, vui64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_any_eq(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -1989,7 +1989,7 @@ int
 vec_cmpud_any_ge (vui64_t a, vui64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_any_ge(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -2021,7 +2021,7 @@ int
 vec_cmpud_any_gt (vui64_t a, vui64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_any_gt(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -2100,7 +2100,7 @@ int
 vec_cmpud_any_ne (vui64_t a, vui64_t b)
 {
   int result;
-#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined (_ARCH_PWR8) && (__GNUC__ >= 6) && (defined(PVECLIB_LITTLE_ENDIAN))
   result = vec_any_ne(a, b);
 #else
   vui32_t wt = { -1, -1, -1, -1};
@@ -2355,7 +2355,7 @@ vec_mrged (vui64_t __VA, vui64_t __VB)
    result[0] = __VA[0];
    result[1] = __VB[0];
    */
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   result = vec_permdi (__VB, __VA, 3);
 #else
   result = vec_permdi (__VA, __VB, 0);
@@ -2388,7 +2388,7 @@ vec_mrghd (vui64_t __VA, vui64_t __VB)
    result[0] = __VA[0];
    result[1] = __VB[0];
    */
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   result = vec_permdi (__VB, __VA, 3);
 #else
   result = vec_permdi (__VA, __VB, 0);
@@ -2421,7 +2421,7 @@ vec_mrgld (vui64_t __VA, vui64_t __VB)
    result[0] = __VA[1];
    result[1] = __VB[1];
    */
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   result = vec_permdi (__VB, __VA, 0);
 #else
   result = vec_permdi (__VA, __VB, 3);
@@ -2455,7 +2455,7 @@ vec_mrgod (vui64_t __VA, vui64_t __VB)
    result[0] = __VA[1];
    result[1] = __VB[1];
    */
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   result = vec_permdi (__VB, __VA, 0);
 #else
   result = vec_permdi (__VA, __VB, 3);
@@ -2578,7 +2578,7 @@ vec_permdi (vui64_t vra, vui64_t vrb, const int ctl)
 #ifdef _ARCH_PWR7
   switch (ctl & 3)
     {
-#if (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__) || (defined (__clang__) && (__clang_major__ < 7))
+#if (defined(PVECLIB_BIG_ENDIAN)) || (defined (__clang__) && (__clang_major__ < 7))
     case 0:
       result = vec_xxpermdi (vra, vrb, 0);
       break;
@@ -2716,7 +2716,7 @@ vec_revbd (vui64_t vra)
       : );
 #endif
 #else
-#if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+#if defined(PVECLIB_BIG_ENDIAN)
   const vui64_t vconstp =
 	CONST_VINT64_DW(0x0706050403020100UL, 0x0F0E0D0C0B0A0908UL);
 #else
@@ -3198,7 +3198,7 @@ vec_vpkudum (vui64_t vra, vui64_t vrb)
   vui32_t r;
 #ifdef _ARCH_PWR8
   __asm__(
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
       "vpkudum %0,%2,%1;\n"
 #else
       "vpkudum %0,%1,%2;\n"

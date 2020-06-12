@@ -1061,7 +1061,7 @@ vec_rdxct10kh (vui8_t vra)
   // this is the isolated high digit multiplied by the radix difference
   // in binary.  For this stage we use 256 - 100 = 156.
   c156 = vec_splats ((unsigned char) 156);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   x156 = vec_mulo ((vui8_t) vra, c156);
 #else
   x156 = vec_mule ((vui8_t) vra, c156);
@@ -2147,7 +2147,7 @@ vec_bcdcfz (vui8_t vrb)
   // Convert to BCD preferred sign code 0xC or 0xD
   znd_s = vec_or (znd_s, (vui8_t) _BCD_CONST_ZERO);
   // Pack the even/odd zone digits into a single vector.
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   bcd = vec_pack ((vui16_t) znd_d, (vui16_t) znd_t);
 #else
   bcd = vec_pack ((vui16_t) znd_t, (vui16_t) znd_d);
@@ -2834,7 +2834,7 @@ vec_bcdctz (vBCD_t vrb)
   // Isolate the even/odd nibbles and merge low bytes for zoned
   znd_d = vec_and (bcd_u, dmask);
   znd_t = vec_srbi (bcd_u, 4);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   znd_s = vec_mergeh (znd_d, znd_t);
 #else
   znd_s = vec_mergel (znd_t, znd_d);
@@ -4332,7 +4332,7 @@ vec_rdxcf10kh (vui16_t vra)
    * difference in binary.  For this stage we use 0x100 - 100 = 156.  */
   high_digit = vra / 100;
   c156 = vec_splats ((unsigned short) 156);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   x156 = vec_vmuleub ((vui8_t) high_digit, (vui8_t) c156);
 #else
   x156 = vec_vmuloub ((vui8_t) high_digit, (vui8_t) c156);
@@ -4385,7 +4385,7 @@ vec_rdxcf100mw (vui32_t vra)
 #else
     {
       vui32_t x;
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
       x = vec_vmuleuh ((vui16_t) high_digit, (vui16_t) c);
 #else
       x = vec_vmulouh ((vui16_t) high_digit, (vui16_t) c);
@@ -4445,7 +4445,7 @@ vec_rdxcf10E16d (vui64_t vra)
   high_digit = vec_mulhud (vra, mul_invs_ten8);
   high_digit = vec_srdi (high_digit, shift_ten8);
   c = vec_splats ((unsigned long)4194967296);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   x = vec_muleuw ((vui32_t) high_digit, (vui32_t) c);
 #else
   x = vec_mulouw ((vui32_t) high_digit, (vui32_t) c);
@@ -4569,7 +4569,7 @@ vec_rdxcfzt100b (vui8_t zone00, vui8_t zone16)
   znd16 = vec_and (zone16, dmask);
   /* Pack the odd zone digits into a single vector.
      This is the unit digit of each zoned digit pair. */
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   ones = vec_pack ((vui16_t) znd16, (vui16_t) znd00);
 #else
   ones = vec_pack ((vui16_t) znd00, (vui16_t) znd16);
@@ -4577,7 +4577,7 @@ vec_rdxcfzt100b (vui8_t zone00, vui8_t zone16)
   /* Multiply the even zone digits by 10 before packing
      them into a single vector.
      This is the tens digit of each zoned digit pair. */
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   ten00 = vec_mulo (znd00, dx10);
   ten16 = vec_mulo (znd16, dx10);
   tens = vec_pack (ten16, ten00);
@@ -4677,7 +4677,7 @@ vec_rdxct10kh (vui8_t vra)
    * this is the isolated high digit multiplied by the radix difference
    * in binary.  For this stage we use 0x100 - 100 = 156.  */
   c156 = vec_splats ((unsigned char) 156);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   x156 = vec_mulo ((vui8_t) vra, c156);
 #else
   x156 = vec_mule ((vui8_t) vra, c156);
@@ -4725,7 +4725,7 @@ vec_rdxct100mw (vui16_t vra)
    * this is the isolated high digit multiplied by the radix difference
    * in binary.  For this stage we use 0x10000 - 10000 = 55536.  */
   c55536 = vec_splats ((unsigned short) 55536);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   x55536 = vec_mulo ((vui16_t) vra, c55536);
 #else
   x55536 = vec_mule ((vui16_t) vra, c55536);
@@ -4775,7 +4775,7 @@ vec_rdxct10E16d (vui32_t vra)
    * in binary.  For this stage we use 0x100000000 - 100000000 =
    * 4194967296.  */
   c4194967296 = vec_splats ((unsigned int) 4194967296);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
   x4194967296 = vec_mulouw ((vui32_t) vra, c4194967296);
 #else
   x4194967296 = vec_muleuw ((vui32_t) vra, c4194967296);

@@ -165,7 +165,7 @@ test_revbh (void)
   printf ("\ntest_revbh Reverse Bytes in halfwords\n");
 
   i = (vui32_t ) { 0, 1, 2, 3 };
-#if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+#if defined(PVECLIB_BIG_ENDIAN)
   e = (vui32_t)CONST_VINT32_W(0x00000000, 0x00000100, 0x00000200, 0x00000300);
 #else
   e = (vui32_t)CONST_VINT32_W(0x00000300, 0x00000200, 0x00000100, 0x00000000);
@@ -190,7 +190,7 @@ test_revbh (void)
 
   ip = (vui32_t*) mem;
   i = *ip;
-#if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+#if defined(PVECLIB_BIG_ENDIAN)
   e = (vui32_t)CONST_VINT32_W(0xf1f0f3f2, 0xe1e0e3e2, 0xd1d0d3d2, 0xc1c0c3c2);
 #else
   e = (vui32_t)CONST_VINT32_W(0xc2c3c0c1, 0xd2d3d0d1, 0xe2e3e0e1, 0xf2f3f0f1);

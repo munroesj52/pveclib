@@ -270,7 +270,7 @@ _test_xfer_bin128_2_vui16t (__binary128 f128)
  * compilers will do. */
 
 #ifndef __clang__ // to disable __clang__ because <math.h> fails
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if defined(PVECLIB_LITTLE_ENDIAN)
 int
 test_gcc_f128_signbit (__Float128 value)
   {
